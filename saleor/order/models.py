@@ -22,6 +22,7 @@ from ..core.models import BaseNote
 from ..core.utils import build_absolute_uri
 from ..core.utils.taxes import ZERO_TAXED_MONEY
 from ..discount.models import Voucher
+from ..shipping import zero_weight
 from ..shipping.models import ShippingMethod
 
 
@@ -96,7 +97,7 @@ class Order(models.Model):
     customer_note = models.TextField(blank=True, default='')
     weight = MeasurementField(
         measurement=Weight, unit_choices=settings.DEFAULT_WEIGHT_UNITS,
-        default=0)
+        default=zero_weight)
     objects = OrderQueryset.as_manager()
 
     class Meta:

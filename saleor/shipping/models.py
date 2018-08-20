@@ -11,6 +11,7 @@ from prices import MoneyRange
 from . import ShippingMethodType
 from ..core.utils import format_money
 from ..core.utils.taxes import get_taxed_shipping_price
+from ..shipping import zero_weight
 from .utils import (
     applicable_price_based_methods, applicable_weight_based_methods,
     get_price_type_display, get_weight_type_display)
@@ -84,7 +85,7 @@ class ShippingMethod(models.Model):
         decimal_places=settings.DEFAULT_DECIMAL_PLACES, blank=True, null=True)
     minimum_order_weight = MeasurementField(
         measurement=Weight, unit_choices=settings.DEFAULT_WEIGHT_UNITS,
-        default=0, blank=True, null=True)
+        default=zero_weight, blank=True, null=True)
     maximum_order_weight = MeasurementField(
         measurement=Weight, unit_choices=settings.DEFAULT_WEIGHT_UNITS,
         blank=True, null=True)
